@@ -16,7 +16,11 @@ MORSE_CODE = {'A': '.-',     'B': '-...',   'C': '-.-.',
               '.': '.-.-.-', ',': '--..--', ':': '---...',
               "'": '.----.', '-': '-....-',
               }
-
+DOT = '.'
+PLUS = '+'
+HYPEN = '-'
+EQUAL = "="
+TRANSLAT_SPECIAL_LETTER_DICT = {PLUS: MORSE_CODE.get(DOT), EQUAL: MORSE_CODE.get(HYPEN)}
 
 def english_to_morse(
     input_file: str = "lorem.txt",
@@ -37,3 +41,38 @@ def english_to_morse(
         Name of output file containing the translated Morse code. Please don't change
         it since it's also hard-coded in the tests file.
     """
+    morse_code_text = ""
+
+    with open(input_file, 'r') as input_text:
+        english_text = input_text.read()
+        morse_code_text = translate_text_to_morse_code(english_text)
+        
+    with open(output_file, 'w') as output_text:
+        output_text.write(morse_code_text)
+
+
+def translate_text_to_morse_code(input_text: str):
+    """Input: String wrote in english, numbers and ".", ",", "'", "-", :" 
+        Output: a translation on that string to morse code"""
+    
+    morse_code_text = input_text.upper()
+    morse_code_text = morse_code_text.replace(" ", "\n")
+    morse_code_text = morse_code_text.replace(DOT, PLUS)
+    morse_code_text = morse_code_text.replace(HYPEN, EQUAL)
+
+    for english_word, morse_word in MORSE_CODE.items():
+        if english_word not in (DOT, HYPEN):
+            morse_code_text = morse_code_text.replace(english_word, morse_word)
+        
+    for special_letter, morse_word in TRANSLAT_SPECIAL_LETTER_DICT.items():
+        morse_code_text = morse_code_text.replace(special_letter, morse_word)
+
+    return morse_code_text
+
+
+def main():
+    english_to_morse()
+    with open("lorem_morse.txt", 'r') as file1, open("expected_lorem_morse.txt", 'r') as file2:
+        print(file1.read() == file2.read())
+
+main()
