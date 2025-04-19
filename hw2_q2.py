@@ -65,7 +65,6 @@ def arange_meetings_and_not_meetings_people(agent_listing: tuple)-> tuple:
 
 def meet(agent1: Agent, agent2: Agent) -> tuple:
 
-
     if agent1.category == Condition.CURE:
         if agent2.category == Condition.DYING:
             agent2 = agent2._replace(category= Condition.SICK)
@@ -94,3 +93,7 @@ def meet(agent1: Agent, agent2: Agent) -> tuple:
 
     return agent1, agent2
     
+if __name__ == "__main__":
+    input_tuple = (Agent("Buddy", Condition.CURE), Agent("Holly", Condition.DEAD))
+    output_list = meetup(input_tuple)
+    print(f"Question 2 solution: {output_list}")

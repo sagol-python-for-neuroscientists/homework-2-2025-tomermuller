@@ -70,9 +70,6 @@ def translate_text_to_morse_code(input_text: str):
     return morse_code_text
 
 
-def main():
+if __name__ == "__main__":
     english_to_morse()
-    with open("lorem_morse.txt", 'r') as file1, open("expected_lorem_morse.txt", 'r') as file2:
-        print(file1.read() == file2.read())
-
-main()
+    print("Question 2 solution are found in file 'lorem_morse.txt'")
