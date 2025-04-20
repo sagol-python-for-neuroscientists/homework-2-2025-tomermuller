@@ -72,4 +72,4 @@ def translate_text_to_morse_code(input_text: str):
 
 if __name__ == "__main__":
     english_to_morse()
-    print("Question 2 solution are found in file 'lorem_morse.txt'")
+    print("Question 1 solution are found in file 'lorem_morse.txt'")
